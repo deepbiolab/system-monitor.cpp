@@ -520,5 +520,145 @@ In C++, there **isn't a strict convention for naming setter methods,** but it's 
 
 
 
+## Abstraction
+
+See code file in [here](./04-abstraction)
+
+Abstraction refers to the **separation of a class's interface from the details of its implementation**. The interface provides a way to interact with an object, while **hiding the details and implementation of how the class works**.
+
+
+
+The `String()` function within this `Date` class is an example of abstraction.
+
+```cpp
+class Date {
+ public:
+  ...
+  std::string String() const;
+  ...
+};
+```
+
+The user is able to interact with the `Date` class through the `String()` function, but the user does not need to know about the implementation of either `Date` or `String()`.
+
+For example, the user does not know, or need to know, that this object internally contains three `int` member variables. The user can just call the `String()` method to get data.
+
+If the designer of this class ever decides to change how the data is stored internally -- using a vector of `int`s instead of three separate `int`s, for example -- the user of the `Date` class will not need to know.
+
+
+
+### Example: Sphere `Class`
+
+In this exercise you will practice abstraction by creating a class which represents a sphere.
+
+Declare:
+
+1. A constructor function that takes the radius as an argument
+2. A member function that returns the [volume](https://www.google.com/search?q=sphere+volume)
+
+**Directions**
+
+1. Define a class called `Sphere`.
+2. Add one private member variable: `radius`.
+3. Define a constructor to initialize the radius.
+4. Define an accessor method that returns the radius.
+5. Define a member function to return the volume of the sphere.
+6. Write a `main()` function to initialize an object of type `Sphere`.
+
+
+
+
+
+### Example: Sphere Private Method
+
+Abstraction is used to **expose only relevant information to the user**. By hiding implementation details, we give ourselves flexibility to modify how the program works. In this example, you'll practice abstracting implementation details from the user.
+
+**Directions**
+
+In this exercise, you'll update the `class Sphere` so that it becomes possible to change the radius of a sphere after it has been initialized. In order to do this, you'll move the two class [class invariants](https://en.wikipedia.org/wiki/Class_invariant) into private member functions.
+
+1. Add a mutator method to change the radius of an existing `Sphere`.
+2. Copy the range-check on `radius_` from the class constructor into the mutator method.
+3. Copy the `volume_` calculation from the class constructor into the same mutator method.
+4. Verify that the mutator method successfully updates both the radius and the volume and the class still functions correctly.
+
+
+
+### Static Members
+
+Class members can be declared `static`, which means that the **member belongs to the entire class**, **instead of to a specific instance of the class**(avoid copy behavior). More specifically, a `static` member is **created only once and then shared by all instances** (i.e. objects) of the class. That means that **if the `static` member gets changed**, **either by a user of the class** or **within a member function of the class itself**, then **all members of the class will see that change the next time** they access the `static` member.
+
+**Implementation**
+
+`static` members are **declared** within their `class` (**often in a header file**) but in most cases they must be **defined** within the **global scope**. That's because memory is allocated for `static` variables immediately when the program begins, at the same time any global variables are initialized.
+
+Here is an example:
+
+```cpp
+#include <cassert>
+
+class Foo {
+ public:
+  static int count;
+  Foo() { Foo::count += 1; }
+};
+
+int Foo::count{0};
+
+int main() {
+  Foo f{};
+  assert(Foo::count == 1);
+}
+```
+
+An exception to the global definition of `static` members is if such members can be marked as [`constexpr`](https://en.cppreference.com/w/cpp/language/constexpr). In that case, the `static` member variable can be both declared and defined within the `class` definition:
+
+```cpp
+struct Kilometer {
+  static constexpr int meters{1000};
+};
+```
+
+> For short, either defined in global scope  or using `constexpr` keyword in class.
+
+
+
+#### Example: Pi
+
+`class Sphere` has a member `const double pi`. Experiment with specifying `pi` to be `const`, `constexpr`, and `static`. 
+
+
+
+### Static Methods
+
+In addition to `static` member variables, **C++ supports `static` member functions** (or "methods"). Just like `static` member variables, `static` member functions are **instance-independent**: they **belong to the class**, not to any particular instance of the class.
+
+One corollary to this is that **we can method invoke a `static` member function *without ever creating an instance of the class***.
+
+
+
+#### Example: Static Methods
+
+**Instructions**
+
+1. Refactor `class Sphere` to move the volume calculation into a `static` function.
+2. Verify that the class still functions as intended.
+3. Make that `static` function public.
+4. Call that static function directly from `main()` to calculate the hypothetical volume of a sphere you have not yet instantiated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
