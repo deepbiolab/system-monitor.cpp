@@ -186,15 +186,15 @@ In this exercise, you will experiment with friend classes. In the notebook below
 
 see code file in this [folder](./02-polymorphism)
 
-[Polymorphism](https://www.merriam-webster.com/dictionary/polymorphism) is means "assuming many forms".
+[Polymorphism](https://www.merriam-webster.com/dictionary/polymorphism) is means "assuming **many forms**".
 
-In the context of object-oriented programming, [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) describes a paradigm in which a function may behave differently depending on how it is called. In particular, the function will perform differently based on its inputs.
+In the context of object-oriented programming, [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) describes a paradigm in which a **function may behave differently depending on how it is called based on arguments**. 
 
-Polymorphism can be achieved in two ways in C++: overloading and overriding. In this exercise we will focus on overloading.
+Polymorphism can be achieved in two ways in C++: **overloading** and **overriding**. In this exercise we will focus on overloading.
 
 ### Overloading
 
-In C++, you can write two (or more) versions of a function with the same name. This is called ["overloading"](https://en.wikipedia.org/wiki/Function_overloading). Overloading requires that we leave the function name the same, but we modify the function signature. For example, we might define the same function name with multiple different configurations of input arguments.
+In C++, you can write **two (or more) versions of a function** with the **same name**. This is called ["overloading"](https://en.wikipedia.org/wiki/Function_overloading). Overloading requires that we leave the function name the same, but we modify the function signature. For example, we might define the same function name with multiple different configurations of input arguments.
 
 This example of `class Date` overloads:
 
@@ -220,7 +220,7 @@ private:
 
 
 
-### Example: Overloading
+#### Example: Overloading
 
 **Instructions**
 
@@ -235,7 +235,7 @@ Overloading can happen outside of an object-oriented context, too. In this exerc
 
 ### Operator Overloading
 
-. In this exercise you'll see how to achieve polymorphism with [operator overloading](https://en.cppreference.com/w/cpp/language/operators). You can choose any operator from the ASCII table and give it your own set of rules!
+In this exercise you'll see how to achieve polymorphism with [operator overloading](https://en.cppreference.com/w/cpp/language/operators). You can choose any operator from the ASCII table and give it your own set of rules!
 
 Operator overloading can be useful for many things. Consider the `+` operator. We can use it to add `int`s, `double`s, `float`s, or even `std::string`s.
 
@@ -251,7 +251,7 @@ Imagine vector addition. You might want to perform vector addition on a pair of 
 
 
 
-### Example: Operator Overloading
+#### Example: Operator Overloading
 
 **Instructions**
 
@@ -263,15 +263,15 @@ Imagine vector addition. You might want to perform vector addition on a pair of 
 
 ### Virtual Functions
 
-Virtual functions are a polymorphic feature. These functions are declared (and possibly defined) in a base class, and can be overridden by derived classes.
+Virtual functions are a polymorphic feature. These functions are **declared (and possibly defined) in a base class**, and can be **overridden by derived classes.**
 
-This approach declares an [interface](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary) at the base level, but delegates the implementation of the interface to the derived classes.
+This approach **declares an [interface](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary)** at the base level, but delegates the **implementation of the interface to the derived classes.**
 
-In this exercise, `class Shape` is the base class. Geometrical shapes possess both an area and a perimeter. `Area()` and `Perimeter()` should be virtual functions of the base class interface. Append `= 0` to each of these functions in order to declare them to be "pure" virtual functions.
+In this exercise, `class Shape` is the base class. Geometrical shapes possess both an area and a perimeter. `Area()` and `Perimeter()` should be virtual functions of the base class interface. **Append `= 0` to each of these functions in order to declare** them to be "pure" virtual functions.
 
-A [pure virtual function](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary) is a [virtual function](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary) that the base class [declares](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary) but does not [define](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary).
+A [**pure virtual function**](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary) is a [virtual function](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary) that the base class **[declares](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary) but does not [define](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary).**
 
-A pure virtual function has the side effect of making its class [abstract](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary). This means that the class cannot be instantiated. Instead, only classes that derive from the abstract class and override the pure virtual function can be instantiated.
+A **pure virtual function** has the side effect of making its class [abstract](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-glossary). This means that the **class cannot be instantiated**. Instead, **only classes that derive from the abstract class** and **override the pure virtual function can be instantiated.**
 
 ```cpp
 class Shape {
@@ -282,11 +282,11 @@ class Shape {
 };
 ```
 
-Virtual functions can be defined by derived classes, but this is not required. However, if we mark the virtual function with `= 0` in the base class, then we are declaring the function to be a pure virtual function. This means that the base class does not define this function. A derived class must define this function, or else the derived class will be abstract.
+**Virtual functions can be defined by derived classes, but this is not required**. However, **if we mark the virtual function with `= 0` in the base class**, then we are declaring the function to be a pure virtual function. This means that the **base class does not define this function**. A **derived class must define** this function, **or else the derived class will be abstract.**
 
 
 
-### Example: Virtual functions
+#### Example: Virtual functions
 
 **Instructions**
 
@@ -299,12 +299,12 @@ Virtual functions can be defined by derived classes, but this is not required. H
 
 
 
-### Overriding
+#### Overriding
 
 ["Overriding"](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#glossary) a function occurs when:
 
 1. A base class declares a [`virtual` function](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#glossary function).
-2. A derived class *overrides* that virtual function by defining its own implementation with an identical function signature (i.e. the same function name and argument types).
+2. A derived class ***overrides*** that virtual function by defining its own implementation with an identical function signature (i.e. the same function name and argument types).
 
 ```cpp
 class Animal {
@@ -320,27 +320,45 @@ public:
 
 In this example, `Animal` exposes a `virtual` function: `Talk()`, but does not define it. Because `Animal::Talk()` is undefined, it is called a [*pure virtual function*](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#glossary), as opposed to an ordinary (impure? 😉) [*virtual function*](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#glossary).
 
-Furthermore, because `Animal` contains a pure virtual function, the user cannot instantiate an object of type `Animal`. This makes `Animal` an [*abstract class*](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#glossary).
+Furthermore, because `Animal` **contains a pure virtual function**, the user cannot instantiate an object of type `Animal`. This makes `Animal` an [*abstract class*](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#glossary).
 
 `Cat`, however, inherits from `Animal` and overrides `Animal::Talk()` with `Cat::Talk()`, which is defined. Therefore, it is possible to instantiate an object of type `Cat`.
 
 
 
-### Example: Overriding
+#### Function Hiding
 
-**Instructions**
+Function hiding is [closely related, but distinct from](https://stackoverflow.com/questions/19736281/what-are-the-differences-between-overriding-virtual-functions-and-hiding-non-vir), overriding.
 
-1. Create a class `Dog` to inherit from `Animal`.
-2. Define `Dog::Talk()` to override the virtual function `Animal::Talk()`.
-3. Confirm that the tests pass.
+A **derived class hides a base class function**, **as opposed to overriding it**, **if the base class function is not specified to be `virtual`.**
+
+```cpp
+class Cat { // Here, Cat does not derive from a base class
+public:
+  std::string Talk() const { return std::string("Meow"); }
+};
+
+class Lion : public Cat {
+public:
+  std::string Talk() const { return std::string("Roar"); }
+};
+```
+
+In this example, `Cat` is the base class and `Lion` is the derived class. Both `Cat` and `Lion` have `Talk()` member functions.
+
+When an object of type `Lion` calls `Talk()`, the object will run `Lion::Talk()`, not `Cat::Talk()`.
+
+In this situation, **`Lion::Talk()` is *hiding* `Cat::Talk()`**. If `Cat::Talk()` were `virtual`, then `Lion::Talk()` would *override* `Cat::Talk()`, instead of *hiding* it. *Overriding* requires a `virtual` function in the base class.
+
+The distinction between *overriding* and *hiding* is subtle and not terribly significant, but in certain situations ***hiding* [can lead to bizarre errors](https://isocpp.org/wiki/faq/strange-inheritance)**, **particularly when the two functions have slightly different function signatures.**
 
 
 
-### Override
+#### `override` keyword
 
 "Overriding" a function occurs when a derived class defines the implementation of a `virtual` function that it inherits from a base class.
 
-It is possible, but not required, to specify a function declaration as `override`.
+**It is possible, but not required,** to specify a function declaration as `override`.
 
 ```cpp
 class Shape {
@@ -360,13 +378,13 @@ private:
 };
 ```
 
-This specification tells both the compiler and the human programmer that the purpose of this function is to override a virtual function. The compiler will verify that a function specified as `override` does indeed override some other virtual function, or otherwise the compiler will generate an error.
+This specification **tells both the compiler and the human programmer** that the **purpose of this function is to override a virtual function**. The **compiler will verify** that a function specified as `override` does **indeed override some other virtual function**, or otherwise the compiler will generate an error.
 
-Specifying a function as `override` is [good practice](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-override), as it empowers the compiler to verify the code, and communicates the intention of the code to future users.
+Specifying a function as **`override` is [good practice](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rh-override),** as it empowers the compiler to verify the code, and communicates the intention of the code to future users.
 
 
 
-### Example: Override
+#### Example: Override
 
 In this exercise, you will build two [vehicle motion models](http://www.cs.cmu.edu/~motionplanning/reading/PlanningforDynamicVeh-1.pdf), and override the `Move()` member function.
 
@@ -395,6 +413,10 @@ You are encouraged to [read more](http://www.cs.cmu.edu/~motionplanning/reading/
 3. Override the `Move()` function within `class BicycleModel`.
 4. Specify `BicycleModel::Move()` as [`override`](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c128-virtual-functions-should-specify-exactly-one-of-virtual-override-or-final).
 5. Pass the tests in `main()` by verifying that the two `Move()` functions override each other in different scenarios.
+
+
+
+
 
 
 
@@ -430,9 +452,9 @@ see code file in this [folder](./04-templates)
 
 ### Templates
 
-Templates enable generic programming by generalizing a function to apply to any class. Specifically, templates use *types* as parameters so that the same implementation can operate on different data types.
+Templates enable generic programming by **generalizing a function** to apply to any class. Specifically, templates **use *types* as parameters** so that the **same implementation** can operate on **different data types**.
 
-For example, you might need a function to accept many different data types. The function acts on those arguments, perhaps dividing them or sorting them or something else. Rather than writing and maintaining the multiple function declarations, each accepting slightly different arguments, you can write one function and pass the argument types as parameters. At compile time, the compiler then expands the code using the types that are passed as parameters.
+For example, you might need **a function to accept many different data types**. The function acts on those arguments, perhaps dividing them or sorting them or something else. Rather than writing and maintaining the multiple function declarations, each accepting slightly different arguments, you can write one function and pass the argument types as parameters. **At compile time, the compiler then expands the code using the types that are passed as parameters.**
 
 ```cpp
 template <typename Type> Type Sum(Type a, Type b) { return a + b; }
@@ -462,11 +484,11 @@ char Sum(char a, char b) {
 }
 ```
 
-We use the keyword `template` to specify which function is generic. Generic code is the term for code that is independent of types. It is mandatory to put the `template<>` tag before the function signature, to specify and mark that the declaration is generic.
+We **use the keyword `template` to specify which function is generic**. Generic code is the term for code that is independent of types. It is mandatory to put the **`template<>` tag before the function signature**, to specify and mark that the declaration is generic.
 
 Besides `template`, the keyword `typename` (or, alternatively, `class`) specifies the generic type in the function prototype. The parameters that follow `typename` (or `class`) represent generic types in the function declaration.
 
-In order to instantiate a templatized class, use a templatized constructor, for example: `Sum<double>(20.0, 13.7)`. You might recognize this form as the same form used to construct a `vector`. That's because `vector`s are indeed a generic class!
+In order to instantiate a templatized class, use a templatized constructor, for example: `Sum<double>(20.0, 13.7)`. You might recognize this form as the same form used to construct a `vector`. **That's because `vector`s are indeed a generic class!**
 
 
 
@@ -478,18 +500,9 @@ Check out the notebook below to see how that works.
 
 
 
-### Example: Deduction
+### Deduction
 
-In this example, you will see the difference between total and partial [deduction](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rt-deduce).
-
-Deduction occurs when you instantiate an object without explicitly identifying the types. Instead, the compiler "deduces" the types. This can be helpful for writing code that is generic and can handle a variety of inputs.
-
-In this exercise, we will use templates to overload the '#' operator to average two numbers.
-
-**Instructions**
-
-1. Use a template to overload the # operator.
-2. Confirm that the tests pass.
+Deduction occurs when you i**nstantiate an object without explicitly identifying the types**. Instead, the compiler "deduces" the types. This can be helpful for writing code that is generic and can handle a variety of inputs.
 
 
 
@@ -512,3 +525,26 @@ In order for this template specification to work, you will need to include two g
 1. Write the template specification.
 2. Verify that the test passes.
 
+
+
+
+
+## Summary
+
+1. **Classes**: They group information, with members that store data and provide functions.
+2. **Constructors**: These are used to instantiate objects of the class.
+3. **Encapsulation**: Classes encapsulate data and abstract how that data is used, allowing users to interact with the class through its interface without needing to know the internal details.
+4. **Inheritance**: This defines how classes relate to each other and any members they might inherit.
+5. **Generic Programming and Polymorphism**: These concepts allow the same code to work with multiple types, enhancing code reusability and reducing redundancy.
+6. **Modern C++**: The course emphasizes how these object-oriented programming principles contribute to making modern C++ easier to use.
+
+
+
+## Best Practices
+
+1. **Understanding User Concepts**: It's crucial to map your classes to the user's concepts. Engaging with users to understand their problems and solutions can provide valuable insights.
+2. **Learning Fundamentals**: Before building complex models, it's important to learn the fundamental concepts related to the domain you're working in (e.g., biology, history).
+3. **Start Simple**: Instead of trying to create a perfect model from the start, begin with a simple version that addresses a few cases you understand.
+4. **Iterative Development**: Expect that your initial attempts won't work perfectly. Use feedback from users to learn and improve your models incrementally.
+5. **Basic Engineering Principles**: The process of building, testing, and evolving your system based on feedback is a fundamental engineering practice.
+6. **Realistic Expectations**: It's important to remember that achieving a perfect solution on the first try is unrealistic, and learning from mistakes is part of the development process.

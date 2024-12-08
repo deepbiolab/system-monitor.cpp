@@ -6,41 +6,39 @@
 5. Print the object.
 */
 
-
 #include <iostream>
 #include <string>
 using std::string;
 
 class Vehicle {
-public:
-    int wheels = 0;
-    string color = "blue";
-    float weight = 0.0f;
-    
-    void Print() const
-    {
+  public:
+    int    wheels = 0;
+    string color  = "blue";
+    float  weight = 0.0f;
+
+    void Print() const {
         std::cout << "This " << color << " vehicle has " << wheels << " wheels, ";
         std::cout << weight << " kG.\n";
     }
 };
 
 class Car : public Vehicle {
-public:
+  public:
     bool sunroof = false;
 };
 
 class Bicycle : public Vehicle {
-public:
+  public:
     bool kickstand = true;
 };
 
-int main() 
-{
+int main() {
     Car car;
-    car.wheels = 4;
+    car.wheels  = 4;
     car.sunroof = true;
-    car.weight = 500;
+    car.weight  = 500;
     car.Print();
-    if(car.sunroof)
+    if (car.sunroof) {
         std::cout << "And a sunroof!\n";
+    }
 };

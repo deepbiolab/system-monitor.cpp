@@ -15,33 +15,34 @@
 
 // Define base class Animal
 class Animal {
-	public:
-		std::string color;
-		std::string name;
-		int age;
+  public:
+    std::string color;
+    std::string name;
+    int         age;
 };
 
 // Declare derived class Snake
 class Snake : public Animal {
-	public:
-		float length;
-		void MakeSound() { std::cout << "ssss...\n"; }
+  public:
+    float length;
+
+    void MakeSound() { std::cout << "ssss...\n"; }
 };
 
 // Declare derived class Cat
 class Cat : public Animal {
-	public:
-		float height;
-		void MakeSound() { std::cout << "meow...\n"; }
+  public:
+    float height;
+
+    void MakeSound() { std::cout << "meow...\n"; }
 };
 
 // Test in main()
 int main() {
-	Snake snake;
-	snake.length = 10;
-	snake.MakeSound();
-	Cat cat;
-	cat.height = 8;
-	cat.MakeSound();
-
+    Snake snake;
+    snake.length = 10;
+    snake.MakeSound();
+    Cat cat;
+    cat.height = 8;
+    cat.MakeSound();
 }

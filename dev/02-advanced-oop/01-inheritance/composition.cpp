@@ -18,6 +18,7 @@ circle = πr^2).
 */
 
 #include <assert.h>
+
 #include <cmath>
 #include <iostream>
 
@@ -26,25 +27,24 @@ circle = πr^2).
 
 // Define Line Class
 struct LineSegment {
-  double length;
+    double length;
 };
 
 // Define Circle subclass
 class Circle {
- private:
-  LineSegment radius_;
-  double area_;
+  private:
+    LineSegment radius_;
+    double      area_;
 
- public:
-  Circle(LineSegment& radius) : radius_(radius) {
-    area_ = pow(radius_.length, 2) * PI;
-  }
-  double Area() { return area_; }
+  public:
+    Circle(LineSegment & radius) : radius_(radius) { area_ = pow(radius_.length, 2) * PI; }
+
+    double Area() { return area_; }
 };
 
 // Test in main()
 int main() {
-  LineSegment radius{3};
-  Circle circle(radius);
-  assert(int(circle.Area()) == 28);
+    LineSegment radius{ 3 };
+    Circle      circle(radius);
+    assert(int(circle.Area()) == 28);
 }
