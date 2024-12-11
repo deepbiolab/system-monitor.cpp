@@ -19,8 +19,23 @@ using std::vector;
 // DONE: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
 
-// TODO: Return a container composed of the system's processes
-vector<Process>& System::Processes() { return processes_; }
+// DONE: Return a container composed of the system's processes
+vector<Process>& System::Processes() {
+  vector<int> pids = LinuxParser::Pids();
+  processes_.clear();
+  for (auto pid : pids) {
+    string user = LinuxParser::User(pid);
+    string ram = LinuxParser::Ram(pid);
+    string command = LinuxParser::Command(pid);
+    long uptime = LinuxParser::UpTime(pid);
+    float cpu = LinuxParser::ActiveJiffies(pid);
+    Process process(pid, user, command, cpu, ram, uptime);
+    processes_.emplace_back(process);
+  }
+
+  std::sort(processes_.begin(), processes_.end());
+  return processes_;
+}
 
 // DONE: Return the system's kernel identifier (string)
 std::string System::Kernel() { return LinuxParser::Kernel(); }
