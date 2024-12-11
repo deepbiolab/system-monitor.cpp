@@ -70,7 +70,8 @@ vector<int> LinuxParser::Pids() {
 // DONE: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() {
   string line;
-  float mem_total{0.0f}, mem_free{0.0f};
+  float mem_total{0.0f}, mem_free{0.0f}, buffers{0.0f}, cached{0.0f};
+  float shmem{0.0f}, sreclaimable{0.0f};
   string key, value;
 
   std::ifstream filestream(kProcDirectory + kMeminfoFilename);
@@ -78,23 +79,35 @@ float LinuxParser::MemoryUtilization() {
     return 0.0;
   }
 
-  int found = 0;
-  while (found < 2 && std::getline(filestream, line)) {
+  while (std::getline(filestream, line)) {
     std::istringstream linestream(line);
     linestream >> key >> value;
     if (key == "MemTotal:") {
       mem_total = stof(value);
-      found++;
-    }
-    if (key == "MemFree:") {
+    } else if (key == "MemFree:") {
       mem_free = stof(value);
-      found++;
+    } else if (key == "Buffers:") {
+      buffers = stof(value);
+    } else if (key == "Cached:") {
+      cached = stof(value);
+    } else if (key == "Shmem:") {
+      shmem = stof(value);
+    } else if (key == "SReclaimable:") {
+      sreclaimable = stof(value);
+    }
+
+    if (mem_total > 0 && mem_free > 0 && buffers > 0 && cached > 0 &&
+        shmem > 0 && sreclaimable > 0) {
+      break;
     }
   }
 
   filestream.close();
-  if (mem_total > 0 && mem_free > 0) {
-    return (mem_total - mem_free) / mem_total;
+
+  if (mem_total > 0) {
+    float cached_memory = cached + sreclaimable - shmem;
+    float used = mem_total - mem_free - buffers - cached_memory;
+    return used / mem_total;
   }
 
   return 0.0;
@@ -117,21 +130,62 @@ long LinuxParser::UpTime() {
   return 0;
 }
 
-// TODO: Read and return the number of jiffies for the system
-long LinuxParser::Jiffies() { return 0; }
+// DONE: Read and return the number of jiffies for the system
+long LinuxParser::Jiffies() {
+  long idle = IdleJiffies();
+  long non_idle = ActiveJiffies();
+  return idle + non_idle;
+}
 
 // TODO: Read and return the number of active jiffies for a PID
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::ActiveJiffies(int pid [[maybe_unused]]) { return 0; }
 
-// TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies() { return 0; }
+// DONE: Read and return the number of active jiffies for the system
+long LinuxParser::ActiveJiffies() {
+  vector<string> values = CpuUtilization();
+  if (!values.empty() && values.size() >= CPUStates::kSteal_) {
+    long non_idle = std::stol(values[CPUStates::kUser_]) +
+                    std::stol(values[CPUStates::kNice_]) +
+                    std::stol(values[CPUStates::kSystem_]) +
+                    std::stol(values[CPUStates::kIRQ_]) +
+                    std::stol(values[CPUStates::kSoftIRQ_]) +
+                    std::stol(values[CPUStates::kSteal_]);
+    return non_idle;
+  }
+  return 0;
+}
 
-// TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies() { return 0; }
+// DONE: Read and return the number of idle jiffies for the system
+long LinuxParser::IdleJiffies() {
+  vector<string> values = CpuUtilization();
 
-// TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() { return {}; }
+  if (!values.empty() && values.size() >= CPUStates::kIOwait_) {
+    long idle = std::stol(values[CPUStates::kIdle_]) +
+                std::stol(values[CPUStates::kIOwait_]);
+    return idle;
+  }
+  return 0;
+}
+
+// DONE: Read and return CPU utilization
+vector<string> LinuxParser::CpuUtilization() {
+  string line;
+  std::ifstream filestream(kProcDirectory + kStatFilename);
+  if (filestream.is_open()) {
+    vector<string> values;
+    string cpu, value;
+    std::getline(filestream, line);
+    std::istringstream linestream(line);
+    linestream >> cpu;
+    while (linestream >> value) {
+      values.push_back(value);
+    }
+    filestream.close();
+    return values;
+  }
+  return {};
+}
 
 // DONE: Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
